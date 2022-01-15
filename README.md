@@ -1,6 +1,6 @@
-## Spontaneity Generator RSS
+# Spontaneity Generator RSS
 
-This project provides an RSS wrapper around @telepathics' Spontaneity Generator, a
+This project provides an RSS wrapper around [@telepathics' Spontaneity Generator](https://github.com/telepathics/spontaneity-generator), a
 project that generates a random and interesting task for you to do.
 
 ## Setup
