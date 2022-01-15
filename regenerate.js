@@ -13,14 +13,12 @@ if (fs.existsSync('lastbuilddate.txt')) {
 
 const current_date = new Date();
 
-var RSS_FEED = `
-<rss version="2.0">
-    <channel>
-        <title>Challenge of the Day</title>
-    </channel>
-    <link>https://task.jamesg.blog</link>
-    <description>Challenge of the Day. Facts sourced from Spontaneity Generator.</description>
-    <generator>spontaneity-rss</generator>
+var FEED = `
+<feed>
+    <title>Spontaneous Idea of the Day</title>
+    <link>https://telepathics.github.io/spontaneity-generator/</link>
+    <description>Spontaneous Idea of the Day. Facts sourced from Spontaneity Generator.</description>
+    <generator>https://github.com/capjamesg/spontaneity-rss</generator>
     <lastBuildDate>${current_date.toISOString()}</lastBuildDate>
 `;
 
@@ -29,15 +27,16 @@ if (lastBuildDate <= current_date) {
     .then(res => res.json())
     .then(data => {
         var idea = data["idea"];
-        RSS_FEED += `
-            <item>
+        FEED += `
+            <entry>
+                <id>${idea}</id>
                 <title>${idea}</title>
-                <link>https://task.jamesg.blog</link>
-                <description>${idea}</description>
-            </item>
+                <link rel="text/html">https://telepathics.github.io/spontaneity-generator/</link>
+                <content>${idea}</content>
+            </entry>
         `;
         // save to file
-        fs.writeFile('rss.xml', RSS_FEED + '</channel></rss>', function (err) {
+        fs.writeFile('rss.xml', FEED + '</feed>', function (err) {
             if (err) throw err;
             console.log('Saved!');
         });

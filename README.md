@@ -3,6 +3,10 @@
 This project provides an RSS wrapper around [@telepathics' Spontaneity Generator](https://github.com/telepathics/spontaneity-generator), a
 project that generates a random and interesting task for you to do.
 
+To subscribe to the RSS feed, enter the following URL into your feed reader:
+
+    https://task.jamesg.blog/
+
 ## Setup
 
 First, install the required dependencies for this project:
