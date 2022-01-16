@@ -16,10 +16,11 @@ const current_date = new Date();
 var FEED = `
 <feed>
     <title>Spontaneous Idea of the Day</title>
-    <link>https://telepathics.github.io/spontaneity-generator/</link>
-    <description>Spontaneous Idea of the Day. Facts sourced from Spontaneity Generator.</description>
+    <id>https://telepathics.github.io/spontaneity-generator/</id>
+    <link rel="self" type="application/atom+xml" href="https://task.jamesg.blog/feed.xml" />
+    <link rel="alternate" type="text/html" href="https://telepathics.github.io/spontaneity-generator/rss.xml" />
     <generator>https://github.com/capjamesg/spontaneity-rss</generator>
-    <lastBuildDate>${current_date.toISOString()}</lastBuildDate>
+    <updated>${current_date.toISOString()}</updated>
 `;
 
 if (lastBuildDate <= current_date) {
@@ -29,10 +30,16 @@ if (lastBuildDate <= current_date) {
         var idea = data["idea"];
         FEED += `
             <entry>
-                <id>${idea}</id>
+                <id>https://telepathics.github.io/spontaneity-generator/</id>
                 <title>${idea}</title>
-                <link rel="text/html">https://telepathics.github.io/spontaneity-generator/</link>
+                <link rel="alternate" href="https://telepathics.github.io/spontaneity-generator/" />
+                <summary>${idea}</summary>
                 <content>${idea}</content>
+                <author>
+                    <name>task.jamesg.blog</name>
+                </author>
+                <published>${current_date.toISOString()}</published>
+                <updated>${current_date.toISOString()}</updated>
             </entry>
         `;
         // save to file
