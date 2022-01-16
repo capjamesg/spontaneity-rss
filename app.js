@@ -8,7 +8,19 @@ const port = 3009;
 const server = http.createServer((req, res) => {
     var request_path = req.url;
 
-    if (request_path == '/rss.xml') {
+    if (request_path == '/') {
+        // serve index.html
+        fs.readFile('./index.html', (err, data) => {
+            if (err) {
+                res.writeHead(404, {'Content-Type': 'text/plain'});
+                res.write('404 Not Found');
+                res.end();
+            };
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/html');
+            res.end(data);
+        });
+    } else if (request_path == '/feed.xml') {
         // open app.xml file
         fs.readFile('rss.xml', function(err, data) {
             if (err) {
@@ -17,7 +29,7 @@ const server = http.createServer((req, res) => {
                 res.end();
             };
             res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/rss+xml');
+            res.setHeader('Content-Type', 'application/atom+xml');
             res.end(data);
         })
     } else {
